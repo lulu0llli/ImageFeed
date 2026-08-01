@@ -60,20 +60,18 @@ extension ImagesListViewController {
 }
 
 extension ImagesListViewController: UITableViewDelegate {
-    func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return 200
         }
-    
-    let imageWidth = image.size.width
-    let imageHeight = image.size.height
-    let tableViewWidth = tableView.bounds.width
-    
-    let scale = tableViewWidth / imageWidth
-    let cellHeight = imageHeight * scale + 8
-    
-    return cellHeight}
+        
+        let imageWidth = image.size.width
+        let imageHeight = image.size.height
+        let tableViewWidth = tableView.bounds.width - 32  // ← ИСПРАВЛЕНО
+        
+        let scale = tableViewWidth / imageWidth
+        let cellHeight = imageHeight * scale + 8
+        
+        return cellHeight
+    }
 }
