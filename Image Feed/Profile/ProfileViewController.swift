@@ -1,10 +1,3 @@
-//
-//  ProfileViewController.swift
-//  Image Feed
-//
-//  Created by Иульяния on 19.07.2026.
-//
-
 import UIKit
 
 final class ProfileViewController: UIViewController {
@@ -59,35 +52,30 @@ final class ProfileViewController: UIViewController {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
         
-        // Констрейнты
         NSLayoutConstraint.activate([
-            // Аватар
             avatarImageView.widthAnchor.constraint(equalToConstant: 70),
             avatarImageView.heightAnchor.constraint(equalToConstant: 70),
             avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76),
             avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             
-            // Кнопка выхода
             logoutButton.widthAnchor.constraint(equalToConstant: 44),
             logoutButton.heightAnchor.constraint(equalToConstant: 44),
-            logoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 89),     
+            logoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 89),
             logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            // Имя
             nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 34),
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            // Логин
             loginLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             loginLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            // Описание
             descriptionLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])    }
+        ])
+    }
     
     @objc private func didTapLogoutButton() {
         print("Logout tapped")
