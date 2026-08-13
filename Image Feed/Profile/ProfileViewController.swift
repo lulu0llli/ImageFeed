@@ -43,8 +43,11 @@ final class ProfileViewController: UIViewController {
         view.addSubview(descriptionLabel)
         
         // Кнопка выхода
+        guard let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") else {
+            return
+        }
         let logoutButton = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward")!,
+            with: logoutImage,
             target: self,
             action: #selector(didTapLogoutButton)
         )

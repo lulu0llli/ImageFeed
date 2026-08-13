@@ -1,5 +1,15 @@
 import Foundation
 
 final class OAuth2TokenStorage {
-    var token: String? // TODO [Sprint 10] Добавьте реализацию хранилища
+    private let userDefaults = UserDefaults.standard
+    private let tokenKey = "BearerToken"
+    
+    var token: String? {
+        get {
+            userDefaults.string(forKey: tokenKey)
+        }
+        set {
+            userDefaults.set(newValue, forKey: tokenKey)
+        }
+    }
 }

@@ -63,7 +63,14 @@ extension AuthViewController: WebViewViewControllerDelegate {
 extension AuthViewController {
     private func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         oauth2Service.fetchOAuthToken(code) { result in
-            completion(result)
+            switch result {
+            case .success(let token):
+                print("[AuthViewController] Token received: \(token)")
+                completion(.success(token))
+            case .failure(let error):
+                print("[AuthViewController] Error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
 }
