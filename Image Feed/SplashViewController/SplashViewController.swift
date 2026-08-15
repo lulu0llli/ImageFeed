@@ -31,8 +31,28 @@ final class SplashViewController: UIViewController {
             return
         }
         
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
-            .instantiateViewController(withIdentifier: "TabBarViewController")
+        guard let tabBarController = UIStoryboard(name: "Main", bundle: .main)
+            .instantiateViewController(withIdentifier: "TabBarViewController") as? UITabBarController
+        else {
+            assertionFailure("Failed to instantiate TabBarViewController")
+            return
+        }
+
+        guard let ypBlack = UIColor(named: "ypBlack") else {
+            assertionFailure("Missing ypBlack color asset")
+            return
+        }
+
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = ypBlack
+
+        tabBarController.view.backgroundColor = ypBlack
+        tabBarController.tabBar.backgroundColor = ypBlack
+        tabBarController.tabBar.standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            tabBarController.tabBar.scrollEdgeAppearance = appearance
+        }
         window.rootViewController = tabBarController
     }
 }
@@ -56,7 +76,6 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
-        vc.dismiss(animated: true)
         
         switchToTabBarController()
     }

@@ -40,25 +40,27 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        vc.dismiss(animated: true)
         
         fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success:
+                vc.dismiss(animated: true)
                 self.delegate?.didAuthenticate(self)
-            case .failure:
-                // TODO [Sprint 11] Добавьте обработку ошибки
-                break
+            case .failure(let error):
+                // Показываем ошибку (WebView остаётся открытым)
+                print("[AuthViewController] Ошибка получения токена: \(error.localizedDescription)")
             }
         }
     }
-
+    
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         vc.dismiss(animated: true)
     }
 }
+
+
 
 extension AuthViewController {
     private func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
