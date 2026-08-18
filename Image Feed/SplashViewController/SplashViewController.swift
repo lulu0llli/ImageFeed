@@ -31,7 +31,7 @@ final class SplashViewController: UIViewController {
 
     private func setupImageView() {
         view.backgroundColor = UIColor(named: "YP Black")
-        
+
         let imageSplashScreenLogo = UIImage(named: "splashScreenLogo")
         imageView = UIImageView(image: imageSplashScreenLogo)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ final class SplashViewController: UIViewController {
             assertionFailure("Invalid window configuration")
             return
         }
-        
+
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarController")
         window.rootViewController = tabBarController
@@ -69,15 +69,14 @@ final class SplashViewController: UIViewController {
         UIBlockingProgressHUD.show()
         profileService.fetchProfile(token) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
-            
+
             guard let self = self else { return }
-            
+
             switch result {
-            case let .success(profile):
+            case .success(let profile):
                 ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { _ in }
                 self.switchToTabBarController()
-            case let .failure(error):
-                print("[SplashViewController] Ошибка загрузки профиля: \(error.localizedDescription)")
+            case .failure:
                 self.showProfileErrorAlert()
             }
         }
@@ -97,11 +96,11 @@ final class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        
+
         guard let token = storage.token else {
             return
         }
-        
+
         fetchProfile(token: token)
     }
 }
