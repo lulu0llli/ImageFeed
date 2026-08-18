@@ -3,12 +3,12 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-    // MARK: - UI Elements
-    private var avatarImageView: UIImageView!
-    private var nameLabel: UILabel!
-    private var loginNameLabel: UILabel!
-    private var descriptionLabel: UILabel!
-    private var logoutButton: UIButton!
+    // MARK: - UI Elements (теперь все опциональные)
+    private var avatarImageView: UIImageView?
+    private var nameLabel: UILabel?
+    private var loginNameLabel: UILabel?
+    private var descriptionLabel: UILabel?
+    private var logoutButton: UIButton?
     
     // MARK: - Properties
     private let profileService = ProfileService.shared
@@ -28,73 +28,78 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = UIColor(named: "YP Black")
         
         // Аватар
-        avatarImageView = UIImageView()
-        avatarImageView.image = UIImage(named: "avatar")
-        avatarImageView.layer.cornerRadius = 35
-        avatarImageView.layer.masksToBounds = true
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(avatarImageView)
+        let avatar = UIImageView()
+        avatar.image = UIImage(named: "avatar")
+        avatar.layer.cornerRadius = 35
+        avatar.layer.masksToBounds = true
+        avatar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(avatar)
+        avatarImageView = avatar
         
         // Имя
-        nameLabel = UILabel()
-        nameLabel.text = "Екатерина Новикова"
-        nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-        nameLabel.textColor = .white
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nameLabel)
+        let name = UILabel()
+        name.text = "Екатерина Новикова"
+        name.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        name.textColor = .white
+        name.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(name)
+        nameLabel = name
         
         // Логин
-        loginNameLabel = UILabel()
-        loginNameLabel.text = "@ekaterina_nov"
-        loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        loginNameLabel.textColor = UIColor(red: 174/255, green: 175/255, blue: 180/255, alpha: 1)
-        loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loginNameLabel)
+        let login = UILabel()
+        login.text = "@ekaterina_nov"
+        login.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        login.textColor = UIColor(red: 174/255, green: 175/255, blue: 180/255, alpha: 1)
+        login.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(login)
+        loginNameLabel = login
         
         // Описание
-        descriptionLabel = UILabel()
-        descriptionLabel.text = "Hello, world!"
-        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        descriptionLabel.textColor = .white
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(descriptionLabel)
+        let description = UILabel()
+        description.text = "Hello, world!"
+        description.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        description.textColor = .white
+        description.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(description)
+        descriptionLabel = description
         
         // Кнопка выхода
         guard let logoutImage = UIImage(systemName: "ipad.and.arrow.forward") else {
             return
         }
-        logoutButton = UIButton.systemButton(
+        let button = UIButton.systemButton(
             with: logoutImage,
             target: self,
             action: #selector(didTapLogoutButton)
         )
-        logoutButton.tintColor = UIColor(red: 245/255, green: 107/255, blue: 108/255, alpha: 1)
-        logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logoutButton)
+        button.tintColor = UIColor(red: 245/255, green: 107/255, blue: 108/255, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+        logoutButton = button
         
         // Констрейнты
         NSLayoutConstraint.activate([
-            avatarImageView.widthAnchor.constraint(equalToConstant: 70),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 70),
-            avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            avatar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            avatar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            avatar.widthAnchor.constraint(equalToConstant: 70),
+            avatar.heightAnchor.constraint(equalToConstant: 70),
             
-            logoutButton.widthAnchor.constraint(equalToConstant: 44),
-            logoutButton.heightAnchor.constraint(equalToConstant: 44),
-            logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 45),
-            logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 45),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            button.widthAnchor.constraint(equalToConstant: 44),
+            button.heightAnchor.constraint(equalToConstant: 44),
             
-            nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 34),
-            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            name.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 34),
+            name.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            name.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            loginNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            login.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 8),
+            login.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            login.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            description.topAnchor.constraint(equalTo: login.bottomAnchor, constant: 8),
+            description.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            description.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
     
@@ -102,9 +107,9 @@ final class ProfileViewController: UIViewController {
     private func updateProfileDetails() {
         guard let profile = profileService.profile else { return }
         
-        nameLabel.text = profile.name
-        loginNameLabel.text = profile.loginName
-        descriptionLabel.text = profile.bio ?? ""
+        nameLabel?.text = profile.name
+        loginNameLabel?.text = profile.loginName
+        descriptionLabel?.text = profile.bio ?? ""
     }
     
     // MARK: - Avatar
@@ -122,9 +127,10 @@ final class ProfileViewController: UIViewController {
     private func updateAvatar() {
         guard
             let avatarURLString = ProfileImageService.shared.avatarURL,
-            let avatarURL = URL(string: avatarURLString)
+            let avatarURL = URL(string: avatarURLString),
+            let avatarImageView = avatarImageView
         else {
-            avatarImageView.image = UIImage(named: "avatar")
+            avatarImageView?.image = UIImage(named: "avatar")
             return
         }
         
@@ -141,8 +147,31 @@ final class ProfileViewController: UIViewController {
         )
     }
     
-    // MARK: - Actions
+    // MARK: - Logout
     @objc private func didTapLogoutButton() {
-        print("Logout tapped")
+        let alert = UIAlertController(
+            title: "Выход из аккаунта",
+            message: "Ты уверена, что хочешь выйти?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Выйти", style: .destructive) { [weak self] _ in
+            self?.logout()
+        })
+        
+        present(alert, animated: true)
+    }
+    
+    private func logout() {
+        OAuth2TokenStorage.shared.token = nil
+        Kingfisher.ImageCache.default.clearMemoryCache()
+        Kingfisher.ImageCache.default.clearDiskCache()
+        
+        guard let window = UIApplication.shared.windows.first else {
+            return
+        }
+        
+        window.rootViewController = SplashViewController()
     }
 }
