@@ -31,10 +31,14 @@ struct UrlsResult: Codable {
 }
 
 extension PhotoResult {
+    private static let dateFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        return formatter
+    }()
+
     func toPhoto() -> Photo {
         let size = CGSize(width: width, height: height)
-        let dateFormatter = ISO8601DateFormatter()
-        let createdAtDate = createdAt.flatMap { dateFormatter.date(from: $0) }
+        let createdAtDate = createdAt.flatMap { PhotoResult.dateFormatter.date(from: $0) }
 
         return Photo(
             id: id,
