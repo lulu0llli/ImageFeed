@@ -154,12 +154,12 @@ final class ProfileViewController: UIViewController {
             message: "Ты уверена, что хочешь выйти?",
             preferredStyle: .alert
         )
-        
+
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Выйти", style: .destructive) { [weak self] _ in
-            self?.logout()
+        alert.addAction(UIAlertAction(title: "Выйти", style: .destructive) { _ in
+            ProfileLogoutService.shared.logout()
         })
-        
+
         present(alert, animated: true)
     }
     

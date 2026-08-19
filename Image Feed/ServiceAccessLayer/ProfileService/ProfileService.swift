@@ -37,21 +37,18 @@ final class ProfileService {
             return
         }
 
-        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             switch result {
             case .success(let result):
                 let profile = Profile(
                     username: result.username,
-                    name: "\(result.firstName) \(result.lastName)"
-                        .trimmingCharacters(in: .whitespaces), 
+                    name: "\(result.firstName) \(result.lastName)".trimmingCharacters(in: .whitespaces),
                     loginName: "@\(result.username)",
                     bio: result.bio
                 )
-
                 self?.profile = profile
                 completion(.success(profile))
             case .failure(let error):
-                print("[fetchProfile]: Ошибка запроса: \(error.localizedDescription)")
                 completion(.failure(error))
             }
             self?.task = nil
@@ -59,6 +56,10 @@ final class ProfileService {
 
         self.task = task
         task.resume()
+    }
+
+    func cleanProfile() {
+        profile = nil
     }
 
     private func makeProfileRequest(token: String) -> URLRequest? {
@@ -72,4 +73,3 @@ final class ProfileService {
         return request
     }
 }
-
