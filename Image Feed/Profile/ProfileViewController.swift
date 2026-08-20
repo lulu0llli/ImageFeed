@@ -3,7 +3,7 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-    // MARK: - UI Elements (теперь все опциональные)
+    // MARK: - UI Elements
     private var avatarImageView: UIImageView?
     private var nameLabel: UILabel?
     private var loginNameLabel: UILabel?
@@ -161,17 +161,5 @@ final class ProfileViewController: UIViewController {
         })
 
         present(alert, animated: true)
-    }
-    
-    private func logout() {
-        OAuth2TokenStorage.shared.token = nil
-        Kingfisher.ImageCache.default.clearMemoryCache()
-        Kingfisher.ImageCache.default.clearDiskCache()
-        
-        guard let window = UIApplication.shared.windows.first else {
-            return
-        }
-        
-        window.rootViewController = SplashViewController()
     }
 }
