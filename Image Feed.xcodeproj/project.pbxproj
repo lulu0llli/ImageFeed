@@ -20,9 +20,6 @@
 		66A2DFED30363AD4003FF82A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55063DA928F724E6008782E1 /* AuthViewController.swift */; };
 		66A2DFEE30363AD4003FF82A /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55063DAC28F72D48008782E1 /* WebViewViewController.swift */; };
 		66A2DFEF30363AD4003FF82A /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2DFE7303639BB003FF82A /* WebViewPresenter.swift */; };
-		66A2DFF030363B19003FF82A /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2DFE7303639BB003FF82A /* WebViewPresenter.swift */; };
-		66A2DFF130363B23003FF82A /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A2DFE9303639E8003FF82A /* AuthHelper.swift */; };
-		66A2DFF230363B2C003FF82A /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB291B42902C12000A53129 /* AuthConfiguration.swift */; };
 		7D3DFB1528DDF696005A13F3 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3DFB1328DDF696005A13F3 /* ImagesListCell.swift */; };
 		7D3DFB1628DDF696005A13F3 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3DFB1428DDF696005A13F3 /* ImagesListViewController.swift */; };
 		7D9CFA4328DDEE7F00D971A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9CFA4228DDEE7F00D971A7 /* AppDelegate.swift */; };
@@ -439,9 +436,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66A2DFF130363B23003FF82A /* AuthHelper.swift in Sources */,
-				66A2DFF030363B19003FF82A /* WebViewPresenter.swift in Sources */,
-				66A2DFF230363B2C003FF82A /* AuthConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

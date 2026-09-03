@@ -72,8 +72,8 @@ final class ImageFeedUITests: XCTestCase {
         
         app.buttons["logout button"].tap()
         
-        let alert = app.alerts["Bye bye!"]
-        alert.scrollViews.otherElements.buttons["Yes"].tap()
+        let alert = app.alerts["Выход из аккаунта"]
+        alert.scrollViews.otherElements.buttons["Выйти"].tap()
         
         let authButton = app.buttons["Authenticate"]
         XCTAssertTrue(authButton.waitForExistence(timeout: 5))
