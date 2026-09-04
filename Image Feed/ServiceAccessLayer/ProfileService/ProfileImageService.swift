@@ -32,7 +32,7 @@ final class ProfileImageService {
 
     private var task: URLSessionTask?
 
-    // Метод для получения аватарки 
+    // Метод для получения аватарки
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         task?.cancel()
 

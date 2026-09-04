@@ -57,7 +57,7 @@ final class OAuth2Service {
 
                 case .failure(let error):
                     print("[fetchOAuthToken]: Ошибка запроса: \(error.localizedDescription)")
-                    completion(.failure(error)) 
+                    completion(.failure(error))
 
                     self.task = nil
                     self.lastCode = nil
